@@ -22,8 +22,14 @@ const authenticatePassport = async (req, res, next) => {
       verifyCallback(req, resolve, reject)
     )(req, res, next);
   })
-    .then(() => next())
-    .catch((err) => next(err));
+    .then(() => {
+      console.log('Authentication successful:', req.user);
+      next();
+    })
+    .catch((err) => {
+      console.error('Authentication error:', err);
+      next(new ApiError(401, "Please authenticate"));
+    });
 };
 
 export default authenticatePassport;

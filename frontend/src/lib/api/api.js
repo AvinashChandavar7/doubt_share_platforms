@@ -19,3 +19,13 @@ export const loginUser = async (values) => {
   }
 };
 
+export const getCurrentUser = async (values) => {
+  try {
+    const response = await axios.get(`${config.endpoint}/users/current-user`, values);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || error.message;
+  }
+};
+

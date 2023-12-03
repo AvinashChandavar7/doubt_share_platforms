@@ -89,9 +89,9 @@ export const content = [
 export const theme = {
   container: {
     center: true,
-    padding: "2rem",
+    padding: '2rem',
     screens: {
-      "2xl": "1400px",
+      '2xl': '1400px',
     },
   },
   extend: {
@@ -99,6 +99,7 @@ export const theme = {
       'primary-500': '#22CC6B',
       'primary-600': '#15A453',
       'secondary-500': '#FFB620',
+      'primary-800': '#15803d',
       'off-white': '#D0DFFF',
       'red': '#FF5A5A',
       'dark-1': '#000000',
@@ -109,9 +110,25 @@ export const theme = {
       'light-2': '#EFEFEF',
       'light-3': '#7878A3',
       'light-4': '#5C5C7B',
+      border: "hsl(var(--border))",
+      background: "hsl(var(--background))",
+      // foreground: "hsl(var(--foreground))",
+      // primary: {
+      //   DEFAULT: "hsl(var(--primary))",
+      //   foreground: "hsl(var(--primary-foreground))",
+      // },
+      // secondary: {
+      //   DEFAULT: "hsl(var(--secondary))",
+      //   foreground: "hsl(var(--secondary-foreground))",
+      // },
+      destructive: {
+        DEFAULT: "hsl(var(--destructive))",
+        foreground: "hsl(var(--destructive-foreground))",
+      },
     },
     screens: {
-      'xs': '480px',
+      'xs': '360px',
+      'xl': '425px',
     },
     width: {
       '420': '420px',

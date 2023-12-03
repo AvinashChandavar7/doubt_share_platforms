@@ -27,8 +27,10 @@ const SignInForm = () => {
   const navigate = useNavigate();
 
 
-  const { mutateAsync: signInAccount,
-    isLoading: isSigningInAccount } = useSignInAccount();
+  const {
+    mutateAsync: signInAccount,
+    isLoading: isSigningInAccount
+  } = useSignInAccount();
 
   // const [isSigningInAccount, setIsSigningInAccount] = useState(false);
 
@@ -77,11 +79,15 @@ const SignInForm = () => {
     console.table(values);
     try {
       await signInAccount(values);
+
       toast({ title: "User login successfully" });
       navigate('/');
+
     } catch (error) {
       console.error("Error:", error);
-      toast({ title: "An error occurred while logging in" });
+      toast({
+        title: "An errors occurred while logging in",
+      });
     }
   }
 

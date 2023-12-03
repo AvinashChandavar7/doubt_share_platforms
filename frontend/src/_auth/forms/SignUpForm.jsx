@@ -24,6 +24,7 @@ import {
 
 import { SignupValidation } from "../../lib/validation"
 import { useRegisterAccount } from "../../lib/react-query/queriesAndMutations"
+import { useUserContext } from "../../context/AuthContext"
 // import { config } from "../../config"
 // import { useState } from "react";
 
@@ -36,8 +37,13 @@ const SignUpForm = () => {
   const navigate = useNavigate();
 
 
-  const { mutateAsync: registerUserAccount, isPending: isCreatingUserAccount } = useRegisterAccount();
+  const {
+    mutateAsync: registerUserAccount,
+    isPending: isCreatingUserAccount
+  } = useRegisterAccount();
 
+  // eslint-disable-next-line no-unused-vars
+  const { checkAuthUser, isLoading: isUserLoading } = useUserContext()
   // const [isCreatingUserAccount, setIsCreatingUserAccount] = useState(false);
 
 
@@ -86,19 +92,31 @@ const SignUpForm = () => {
 
     try {
       // Use the mutation to register the user
-      await registerUserAccount(values);
+      const session = await registerUserAccount(values);
 
-      // Show success message or handle the success logic
+      // console.log(session);
+
+      if (!session) {
+        return toast({ title: "An error occurred while registering the user" });
+      }
+
+      // const isLoggedIn = await checkAuthUser();
+
+      // if (isLoggedIn) {
+      //   form.reset();
+      //   navigate('/');
+      // } else {
+      //   return toast({ title: "An error occurred while registering the user" });
+      // }
+
       toast({ title: "User registered successfully" });
 
-      // Navigate to the login page
       navigate('/sign-in');
 
     } catch (error) {
       console.error("Error:", error);
 
-      // Show an error message or handle the error logic
-      toast({ title: "An error occurred while registering the user" });
+      toast({ title: `An error occurred while registering the user :${error.FormMessage} ` });
     }
   }
 
@@ -171,9 +189,9 @@ const SignUpForm = () => {
                     <SelectTrigger className="h-14">
                       <SelectValue placeholder="Select a user type" />
                     </SelectTrigger>
-                    <SelectContent className="bg-neutral-900">
-                      <SelectItem value="Student">Student</SelectItem>
-                      <SelectItem value="Tutor">Tutor</SelectItem>
+                    <SelectContent className="bg-zinc-900">
+                      <SelectItem value="Student" className="hover:bg-zinc-700 ">Student</SelectItem>
+                      <SelectItem value="Tutor" className="hover:bg-zinc-700">Tutor</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormControl>

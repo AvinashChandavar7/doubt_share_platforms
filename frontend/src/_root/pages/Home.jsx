@@ -1,10 +1,8 @@
 
 const Home = () => {
   return (
-    <div>Home
-
-
-
+    <div className="flex-center w-full text-4xl">
+      Home
     </div>
   )
 }
