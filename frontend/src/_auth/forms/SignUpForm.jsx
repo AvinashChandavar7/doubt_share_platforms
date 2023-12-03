@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Link, useNavigate } from "react-router-dom"
 
 import { useForm } from "react-hook-form"
-import axios from "axios";
+// import axios from "axios";
 
 /* Shadcn */
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form"
@@ -23,8 +23,9 @@ import {
 
 
 import { SignupValidation } from "../../lib/validation"
-import { config } from "../../config"
-import { useState } from "react";
+import { useRegisterAccount } from "../../lib/react-query/queriesAndMutations"
+// import { config } from "../../config"
+// import { useState } from "react";
 
 
 
@@ -35,8 +36,9 @@ const SignUpForm = () => {
   const navigate = useNavigate();
 
 
+  const { mutateAsync: registerUserAccount, isPending: isCreatingUserAccount } = useRegisterAccount();
 
-  const [isCreatingUserAccount, setIsCreatingUserAccount] = useState(false);
+  // const [isCreatingUserAccount, setIsCreatingUserAccount] = useState(false);
 
 
   // 1. Define your form.
@@ -50,6 +52,32 @@ const SignUpForm = () => {
     },
   })
 
+  // // 2. Define a submit handler.
+  // async function onSubmit(values) {
+  //   // Do something with the form values.
+  //   // ✅ This will be type-safe and validated.
+  //   console.table(values);
+
+  //   try {
+  //     setIsCreatingUserAccount(true);
+
+  //     const response = await axios.post(`${config.endpoint}/users/register`, values);
+
+  //     console.log(response.data);
+
+  //     toast({ title: "User registered successfully" });
+
+  //     navigate('/sign-in');
+
+  //   } catch (error) {
+  //     console.error("Error:", error);
+
+  //     toast({ title: "An error occurred while registering the user" });
+  //   } finally {
+  //     setIsCreatingUserAccount(false);
+  //   }
+  // }
+
   // 2. Define a submit handler.
   async function onSubmit(values) {
     // Do something with the form values.
@@ -57,22 +85,20 @@ const SignUpForm = () => {
     console.table(values);
 
     try {
-      setIsCreatingUserAccount(true);
+      // Use the mutation to register the user
+      await registerUserAccount(values);
 
-      const response = await axios.post(`${config.endpoint}/users/register`, values);
-
-      console.log(response.data);
-
+      // Show success message or handle the success logic
       toast({ title: "User registered successfully" });
 
+      // Navigate to the login page
       navigate('/sign-in');
 
     } catch (error) {
       console.error("Error:", error);
 
+      // Show an error message or handle the error logic
       toast({ title: "An error occurred while registering the user" });
-    } finally {
-      setIsCreatingUserAccount(false);
     }
   }
 

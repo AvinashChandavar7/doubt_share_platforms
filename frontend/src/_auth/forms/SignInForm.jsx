@@ -1,7 +1,9 @@
 // import { z } from "zod"
+// import { useState } from "react"
+// import { config } from "../../config"
+// import axios from "axios"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Link, useNavigate } from "react-router-dom"
-
 import { useForm } from "react-hook-form"
 
 /* Shadcn */
@@ -13,9 +15,9 @@ import Loader from "../../components/shared/Loader"
 
 
 import { SigninValidation } from "../../lib/validation"
-import { useState } from "react"
-import axios from "axios"
-import { config } from "../../config"
+
+
+import { useSignInAccount } from "../../lib/react-query/queriesAndMutations"
 
 
 
@@ -25,7 +27,10 @@ const SignInForm = () => {
   const navigate = useNavigate();
 
 
-  const [isSigningInAccount, setIsSigningInAccount] = useState(false);
+  const { mutateAsync: signInAccount,
+    isLoading: isSigningInAccount } = useSignInAccount();
+
+  // const [isSigningInAccount, setIsSigningInAccount] = useState(false);
 
   // 1. Define your form.
   const form = useForm({
@@ -36,33 +41,50 @@ const SignInForm = () => {
     },
   })
 
-  // 2. Define a submit handler.
+  // // 2. Define a submit handler.
+  // async function onSubmit(values) {
+  //   // Do something with the form values.
+  //   // ✅ This will be type-safe and validated.
+  //   console.table(values);
+  //   try {
+  //     setIsSigningInAccount(true);
+
+  //     const response = await axios.post(`${config.endpoint}/users/login`, values);
+
+  //     console.log(response.data);
+
+  //     const token = response.data.token;
+
+  //     localStorage.setItem('token', token);
+
+  //     toast({ title: "User login successfully" });
+
+  //     navigate('/');
+  //   } catch (error) {
+  //     console.error("Error:", error);
+
+  //     toast({ title: "An error occurred while logging in" });
+  //   } finally {
+  //     setIsSigningInAccount(false);
+  //   }
+  // }
+
+
+  // // 2. Define a submit handler.
   async function onSubmit(values) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.table(values);
     try {
-      setIsSigningInAccount(true);
-
-      const response = await axios.post(`${config.endpoint}/users/login`, values);
-
-      console.log(response.data);
-
-      const token = response.data.token;
-
-      localStorage.setItem('token', token);
-
+      await signInAccount(values);
       toast({ title: "User login successfully" });
-
       navigate('/');
     } catch (error) {
       console.error("Error:", error);
-
       toast({ title: "An error occurred while logging in" });
-    } finally {
-      setIsSigningInAccount(false);
     }
   }
+
 
 
   return (
