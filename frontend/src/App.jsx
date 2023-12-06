@@ -16,19 +16,20 @@ const App = () => {
   return (
     <main className='flex h-screen'>
       <Routes>
+
         {/* public routes */}
         <Route element={<AuthLayout />} >
           <Route path='/sign-up' element={<SignUpForm />} />
           <Route path='/sign-in' element={<SignInForm />} />
         </Route>
-
+        <Route index path="/" element={<Home />} />
         {/* private routes */}
         <Route element={<RootLayout />} >
-          <Route index element={<Home />} />
+
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/doubts' element={<Doubts />} />
           <Route path='/chatroom' element={<ChatRoom />} />
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile/:id/*' element={<Profile />} />
           <Route path='/create-post' element={<CreateDoubts />} />
         </Route>
       </Routes>

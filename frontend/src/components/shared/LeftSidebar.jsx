@@ -3,30 +3,43 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import { sidebarLinks } from '@/constants';
 import { Button } from '../ui/button';
+// import { useUserContext } from '../../context/AuthContext';
 
 
 const LeftSidebar = () => {
   // eslint-disable-next-line no-unused-vars
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate();
 
+  // const { user } = useUserContext();
+
+  const navigate = useNavigate();
   const { pathname } = useLocation();
 
+  const userToken = localStorage.getItem('token');
+  const userId = localStorage.getItem('id');
+  const userName = localStorage.getItem('username');
+
   useEffect(() => {
-
-
-    const user = localStorage.getItem('token');
-    if (user) {
-      setIsLoggedIn(true);
+    try {
+      if (userToken && userId && userName) {
+        setIsLoggedIn(true);
+      }
+    } catch (error) {
+      console.error('Error accessing localStorage:', error);
     }
-  }, []);
+  }, [setIsLoggedIn, userId, userName, userToken]);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    setIsLoggedIn(false);
-    navigate('/sign-in');
+    try {
+      localStorage.removeItem('username');
+      localStorage.removeItem('token');
+      localStorage.removeItem('id');
+      setIsLoggedIn(false);
+      navigate('/sign-in');
+    } catch (error) {
+      console.error('Error removing items from localStorage:', error);
+    }
   };
-
 
   return (
     <nav className="leftsidebar">
@@ -35,12 +48,14 @@ const LeftSidebar = () => {
           <img src="/assets/icons/logo.svg" alt="logo" className='w-20 h-50 rounded-full' />
         </Link>
 
-        <Link to={`/profile`} className="flex gap-3 items-center ">
+        <Link to={`/profile/${userId}`} className="flex gap-3 items-center ">
           <img className='rounded-full h-14 w-14' alt="profile"
             src={"/assets/icons/profile-placeholder.svg"}
           />
           <div className='flex flex-col'>
-            <p className='body-bold capitalize'>{"name"}</p>
+            <p className='body-bold capitalize'>
+              {userName || "name"}
+            </p>
           </div>
         </Link>
 
@@ -61,7 +76,7 @@ const LeftSidebar = () => {
         </ul>
       </div>
 
-      <Button variant="ghost" className='shad-button_ghost' onClick={(handleLogout)}>
+      <Button variant="ghost" className='shad-button_ghost' onClick={handleLogout}>
         <img src="/assets/icons/logout.svg" alt="logo" />
         <p className='small-medium lg:base-medium'> Logout </p>
       </Button>

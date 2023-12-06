@@ -1,9 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 
 import { createContext, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-// import { getCurrentUser } from '../lib/api/api';
 import { useGetCurrentUser } from '../lib/react-query/queriesAndMutations';
 
 export const INITIAL_USER = {
@@ -11,9 +11,6 @@ export const INITIAL_USER = {
   username: "",
   email: "",
   userType: "",
-  userLanguage: "",
-  classGrade: "",
-  subjectExpertise: ""
 };
 
 const INITIAL_STATE = { user: INITIAL_USER }
@@ -24,13 +21,21 @@ const AuthContext = createContext(INITIAL_STATE);
 
 const AuthProvider = ({ children }) => {
 
+  const navigate = useNavigate();
+
   const [user, setUser] = useState(INITIAL_USER);
   const [isLoading, setIsLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   const { mutateAsync: getCurrentUser } = useGetCurrentUser();
 
-  const navigate = useNavigate();
+  // const {
+  //   data: currentAccount,
+  //   // error,
+  //   // isLoading: queryLoading
+  // } = useGetCurrentUser();
+
+
 
   const checkAuthUser = async () => {
     try {
@@ -38,17 +43,14 @@ const AuthProvider = ({ children }) => {
 
       const { data: currentAccount } = await getCurrentUser();
 
+      console.table(currentAccount);
+
       if (currentAccount) {
         setUser({
           id: currentAccount._id,
-          name: currentAccount.name,
           username: currentAccount.username,
           email: currentAccount.email,
-
           userType: currentAccount.userType,
-          userLanguage: currentAccount.userLanguage,
-          classGrade: currentAccount.classGrade,
-          subjectExpertise: currentAccount.subjectExpertise
         })
       }
 
@@ -57,7 +59,7 @@ const AuthProvider = ({ children }) => {
       return true;
 
     } catch (error) {
-      console.log(error);
+      console.error('Error fetching current user:', error);
       return false
     } finally {
       setIsLoading(false);
@@ -66,9 +68,16 @@ const AuthProvider = ({ children }) => {
 
 
   useEffect(() => {
-    // || localStorage.getItem('token') === null
+    const user = localStorage.getItem('id');
 
-    if (localStorage.getItem('token') === '[]') {
+    console.log("token authContext", user);
+
+    if (
+      // user
+      // ||
+      user === '[]'
+      // || user === null
+    ) {
       navigate('/sign-in')
     }
 

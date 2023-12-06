@@ -18,6 +18,7 @@ import { SigninValidation } from "../../lib/validation"
 
 
 import { useSignInAccount } from "../../lib/react-query/queriesAndMutations"
+import { useUserContext } from "../../context/AuthContext"
 
 
 
@@ -26,11 +27,15 @@ const SignInForm = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
 
+  const { checkAuthUser,
+    // isLoading: isUserLoading
+  } = useUserContext();
 
   const {
     mutateAsync: signInAccount,
     isLoading: isSigningInAccount
   } = useSignInAccount();
+
 
   // const [isSigningInAccount, setIsSigningInAccount] = useState(false);
 
@@ -80,8 +85,22 @@ const SignInForm = () => {
     try {
       await signInAccount(values);
 
-      toast({ title: "User login successfully" });
-      navigate('/');
+
+      const isLoggedIn = await checkAuthUser();
+
+      console.log(isLoggedIn);
+
+      if (isLoggedIn) {
+        form.reset();
+        console.log("Navigating");
+        navigate('/dashboard');
+      } else {
+        return toast({ title: "An error occurred while registering the user" });
+      }
+
+
+      // toast({ title: "User login successfully" });
+      // navigate('/');
 
     } catch (error) {
       console.error("Error:", error);
@@ -104,9 +123,14 @@ const SignInForm = () => {
           Login to your account
         </h2>
 
-        <p className="text-light-3 small-medium md:base-regular mt-2">
-          Welcome Back! Please enter your account details
+        <p className="text-light-3 small-medium text-center md:base-regular mt-2">
+          Welcome Back!
         </p>
+        <p className="text-light-3 small-medium text-center md:base-regular mt-2">
+          Please enter your account details
+        </p>
+
+
 
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-full mt-4">
 

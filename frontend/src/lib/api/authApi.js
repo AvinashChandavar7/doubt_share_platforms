@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { config } from '../../config';
 
+
 export const registerUser = async (values) => {
   try {
     const response = await axios.post(`${config.endpoint}/users/register`, values);
@@ -19,13 +20,23 @@ export const loginUser = async (values) => {
   }
 };
 
-export const getCurrentUser = async (values) => {
+export const getCurrentUser = async () => {
   try {
-    const response = await axios.get(`${config.endpoint}/users/current-user`, values);
-    console.log(response.data);
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      throw new Error('Token not found in localStorage');
+    }
+    // console.log('Get Current UserToken:', token);
+
+    const response = await axios.get(`${config.endpoint}/users/current-user`, {
+      headers: { Authorization: `Bearer ${token}`, },
+    });
+
+    // console.log(response.data);
     return response.data;
   } catch (error) {
+    console.error('Request error:', error);
     throw error.response?.data || error.message;
   }
 };
-

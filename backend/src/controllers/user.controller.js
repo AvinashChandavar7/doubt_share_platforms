@@ -74,6 +74,8 @@ const loginUser = asyncHandler(async (req, res) => {
 const getCurrentUser = asyncHandler(async (req, res) => {
   const currentUser = req.user;
 
+  console.log("currentUser => ", req.user._id);
+
   if (!currentUser) {
     throw new ApiError(404, "User not found");
   }

@@ -3,12 +3,16 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Button } from '../ui/button';
+import { useUserContext } from '../../context/AuthContext';
 
 
 const Topbar = () => {
 
   // eslint-disable-next-line no-unused-vars
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const { user } = useUserContext();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,7 +41,7 @@ const Topbar = () => {
             <img src="/assets/icons/logout.svg" alt="logo" />
           </Button>
 
-          <Link to={`/profile`} className="flex-center gap-3 ">
+          <Link to={`/profile/${user.id}`} className="flex-center gap-3 ">
             <img
               src="/assets/icons/profile-placeholder.svg"
               alt="profile"

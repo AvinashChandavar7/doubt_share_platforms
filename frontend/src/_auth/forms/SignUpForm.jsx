@@ -43,7 +43,7 @@ const SignUpForm = () => {
   } = useRegisterAccount();
 
   // eslint-disable-next-line no-unused-vars
-  const { checkAuthUser, isLoading: isUserLoading } = useUserContext()
+  const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
   // const [isCreatingUserAccount, setIsCreatingUserAccount] = useState(false);
 
 
@@ -116,7 +116,10 @@ const SignUpForm = () => {
     } catch (error) {
       console.error("Error:", error);
 
-      toast({ title: `An error occurred while registering the user :${error.FormMessage} ` });
+      toast({
+        variant: "destructive",
+        title: `An error occurred while registering the user :${error.FormMessage} `
+      });
     }
   }
 

@@ -66,3 +66,8 @@ export const validStatus = [
   { id: '2', value: 'Accepted', label: 'Accepted' },
   { id: '3', value: 'Rejected', label: 'Rejected' }
 ];
+
+
+// const API_ENDPOINT_CURRENT_USER = `${config.endpoint}/users/current-user`;
+// const API_ENDPOINT_REGISTER_USER = `${config.endpoint}/users/register`;
+// const API_ENDPOINT_LOGIN_USER = `${config.endpoint}/users/login`;

@@ -14,10 +14,7 @@ import { useToast } from "../../components/ui/use-toast"
 import Loader from "../../components/shared/Loader"
 
 import { Label } from "../../components/ui/label"
-import { RadioGroup, RadioGroupItem } from "../../components/ui/radio-group"
-
-
-
+import { RadioGroup, RadioGroupItem } from "../../components/ui/radio-group";
 
 import {
   Select,
@@ -27,31 +24,39 @@ import {
   SelectValue,
 } from "../../components/ui/select"
 
-
-
-
 import { PostValidation } from "../../lib/validation";
-import { validLanguage, validSubjects, validSubjectssss } from "../../constants"
-import { useState } from "react"
-
-
-
+import { validLanguage, validSubjects } from "../../constants"
+import { useEffect, useState } from "react"
+import { useUserContext } from "../../context/AuthContext"
+import { useCreateMyDoubtsPost } from "../../lib/react-query/queriesAndMutations"
 
 
 const PostMyDoubts = ({ post, action }) => {
 
-  // const navigate = useNavigate();
-  // const { toast } = useToast();
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const [selectedSubject, setSelectedSubject] = useState(null);
+
+  const {
+    mutateAsync: createPost,
+    isPending: isLoadingCreate
+  } = useCreateMyDoubtsPost();
+
+  // const { user } = useUserContext();
+
+  const userId = localStorage.getItem('id');
+
+
+  useEffect(() => { }, [userId]);
 
   // 1. Define your form.
   const form = useForm({
     resolver: zodResolver(PostValidation),
     defaultValues: {
-      userType: '',
-      language: '',
-      description: '',
+      userType: post ? post.userType : "",
+      language: post ? post.language : "",
+      description: post ? post.description : "",
       // imgURL: '',
     },
   });
@@ -60,9 +65,16 @@ const PostMyDoubts = ({ post, action }) => {
   async function onSubmit(values) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values)
+    console.table(values)
 
+    const newPost = await createPost({ ...values, userId: userId });
 
+    if (!newPost) {
+      toast({ variant: "destructive", title: "created Doubts successfully" });
+    }
+
+    toast({ title: "created Doubts successfully" });
+    navigate("/");
   }
 
 
@@ -101,14 +113,12 @@ const PostMyDoubts = ({ post, action }) => {
             </FormItem>
           )}
         />
+
         {/* {selectedSubject && (
           <div className="flex items-center justify-center">
             <img src={validSubjects.find(subject => subject.value === selectedSubject)?.imgURL} alt="Subject Image" className="w-5 h-5" />
           </div>
         )} */}
-
-
-
 
         <FormField
           control={form.control}
@@ -145,9 +155,6 @@ const PostMyDoubts = ({ post, action }) => {
           )}
         />
 
-
-
-
         {/* Caption */}
         <FormField
           control={form.control}
@@ -162,13 +169,6 @@ const PostMyDoubts = ({ post, action }) => {
             </FormItem>
           )}
         />
-
-
-
-
-
-
-
 
         <div className="flex gap-4 items-center justify-end">
           <Button type="button" className="shad-button_dark_4">Cancel</Button>

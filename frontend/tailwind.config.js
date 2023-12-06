@@ -126,6 +126,9 @@ export const theme = {
         foreground: "hsl(var(--destructive-foreground))",
       },
     },
+    backgroundImage: {
+      'hero-background': "url('/assets/images/landingPage.png')",
+    },
     screens: {
       'xs': '360px',
       'xl': '425px',
