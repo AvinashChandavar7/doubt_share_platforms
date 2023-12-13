@@ -68,6 +68,7 @@ const loginUser = asyncHandler(async (req, res) => {
   // Generate a token
   const token = user.generateAccessToken();
 
+
   return res.status(201).json(new ApiResponse(200, { user: user, token }, "User Login Successfully"));
 });
 
