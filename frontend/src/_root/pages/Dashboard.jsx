@@ -16,6 +16,7 @@ const Dashboard = () => {
     isPending: isPostLoading
   } = useCreateMyDoubtsPost();
 
+  // console.log(posts);
 
   return (
     <section className="flex flex-1">
@@ -32,6 +33,8 @@ const Dashboard = () => {
           ))}
         </div>
 
+
+        <Heading title={"Doubts"} />
         {
           isPostLoading && !posts ? (
             <Loader />

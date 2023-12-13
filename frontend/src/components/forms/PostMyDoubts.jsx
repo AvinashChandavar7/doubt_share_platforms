@@ -54,6 +54,7 @@ const PostMyDoubts = ({ post, action }) => {
   const form = useForm({
     resolver: zodResolver(PostValidation),
     defaultValues: {
+      studentId: userId,
       userType: post ? post.userType : "",
       language: post ? post.language : "",
       description: post ? post.description : "",

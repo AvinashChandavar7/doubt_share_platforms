@@ -81,18 +81,18 @@ const SignInForm = () => {
   async function onSubmit(values) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.table(values);
+    // console.table(values);
     try {
       await signInAccount(values);
 
 
       const isLoggedIn = await checkAuthUser();
 
-      console.log(isLoggedIn);
+      // console.log(isLoggedIn);
 
       if (isLoggedIn) {
         form.reset();
-        console.log("Navigating");
+        // console.log("Navigating");
         navigate('/dashboard');
       } else {
         return toast({ title: "An error occurred while registering the user" });

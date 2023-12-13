@@ -1,4 +1,4 @@
-import PostMyDoubts from "../../components/froms/PostMyDoubts"
+import PostMyDoubts from "../../components/forms/PostMyDoubts"
 import Heading from "../../components/shared/Heading"
 
 const CreateDoubts = () => {
@@ -6,7 +6,7 @@ const CreateDoubts = () => {
     <div className="flex flex-1">
       <div className="common-container">
         <div className="max-w-5xl flex-start gap-3 justify-start w-full">
-          <img src="/public/assets/icons/add-post.svg" alt="add-post" width={36} height={36} />
+          <img src="/assets/icons/add-post.svg" alt="add-post" width={36} height={36} />
           <Heading title={"Add Doubts Details"} />
 
         </div>

@@ -44,7 +44,7 @@ const LeftSidebar = () => {
   return (
     <nav className="leftsidebar">
       <div className="flex flex-col gap-11">
-        <Link to="/" className="flex gap-3 items-center  border rounded-md  justify-center transform-cpu">
+        <Link to="/dashboard" className="flex gap-3 items-center  border rounded-md  justify-center transform-cpu">
           <img src="/assets/icons/logo.svg" alt="logo" className='w-20 h-50 rounded-full' />
         </Link>
 

@@ -48,7 +48,7 @@ export const useSignInAccount = () => {
       const id = data.data.user._id;
       const username = data.data.user.username;
 
-      console.table("login =>", data);
+      // console.table("login =>", data);
       // console.log("login =>", id);
       // console.log("login =>", username);
 
@@ -79,13 +79,13 @@ export const useGetCurrentUser = () => {
 
       console.table("getCurrentUser =>", data);
 
-      const token = data.data.token;
-      const id = data.data?._id;
-      const username = data.data?.username;
+      // const token = data.data.token;
+      // const id = data.data?._id;
+      // const username = data.data?.username;
 
-      localStorage.setItem('token', token);
-      localStorage.setItem('id', id);
-      localStorage.setItem('username', username);
+      // localStorage.setItem('token', token);
+      // localStorage.setItem('id', id);
+      // localStorage.setItem('username', username);
 
       // Invalidate and refetch relevant queries (if needed)
       // Replace 'user' with the relevant query key

@@ -68,9 +68,9 @@ const AuthProvider = ({ children }) => {
 
 
   useEffect(() => {
-    const user = localStorage.getItem('id');
+    const userId = localStorage.getItem('id');
 
-    console.log("token authContext", user);
+    console.log("token authContext", userId);
 
     if (
       // user
