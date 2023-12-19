@@ -27,7 +27,11 @@ export const validSubjects = [
   { id: '5', value: 'english', label: 'English', imgURL: "/assets/icons/chat.svg", },
   { id: '6', value: 'hindi', label: 'Hindi', imgURL: "/assets/icons/chat.svg", },
   { id: '7', value: 'kannada', label: 'Kannada', imgURL: "/assets/icons/chat.svg", },
-  { id: '8', value: 'other', label: 'Other', imgURL: "/assets/icons/chat.svg", }
+  { id: '8', value: 'other', label: 'Other', imgURL: "/assets/icons/chat.svg", },
+  // { id: '9', value: 'other', label: 'Other', imgURL: "/assets/icons/chat.svg", },
+  // { id: '10', value: 'other', label: 'Other', imgURL: "/assets/icons/chat.svg", },
+  // { id: '11', value: 'other', label: 'Other', imgURL: "/assets/icons/chat.svg", },
+  // { id: '12', value: 'other', label: 'Other', imgURL: "/assets/icons/chat.svg", },
 ];
 
 // Define constants for valid grades

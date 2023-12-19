@@ -1,23 +1,10 @@
-import {
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient, } from '@tanstack/react-query';
 
-import {
-  getCurrentUser,
-  loginUser,
-  registerUser,
-
-
-} from '../api/authApi.js';
+import { getCurrentUser, loginUser, registerUser, } from '../api/authApi.js';
 
 import { QUERY_KEYS } from './queryKey.js';
 
-import {
-  createMyDoubtsPost,
-  getRecentDoubtsPosts
-} from '../api/doubtsApi.js';
+import { createMyDoubtsPost, getRecentDoubtsPosts } from '../api/doubtsApi.js';
 
 export const useRegisterAccount = () => {
   const queryClient = useQueryClient();
@@ -27,7 +14,6 @@ export const useRegisterAccount = () => {
     onSuccess: (data) => {
       // Handle successful registration, e.g., show success message and navigate
       console.log("User registered successfully", data);
-
 
       // Invalidate and refetch relevant queries (if needed)
       // Replace 'user' with the relevant query key
@@ -64,28 +50,12 @@ export const useSignInAccount = () => {
 };
 
 
-// export const useGetCurrentUser = () => {
-//   // return useQuery('currentUser', getCurrentUser);
-//   return useQuery('currentUser', () => getCurrentUser());
-// };
-
-
 export const useGetCurrentUser = () => {
   // const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: getCurrentUser,
     onSuccess: () => {
-
-      // console.table("getCurrentUser =>", data);
-
-      // const token = data.data.token;
-      // const id = data.data?._id;
-      // const username = data.data?.username;
-
-      // localStorage.setItem('token', token);
-      // localStorage.setItem('id', id);
-      // localStorage.setItem('username', username);
 
       // Invalidate and refetch relevant queries (if needed)
       // Replace 'user' with the relevant query key

@@ -1,47 +1,22 @@
-
+import Loader from "@/components/shared/Loader";
 import Heading from "../../components/shared/Heading"
 import SubjectCard from "../../components/shared/SubjectCard"
-import { validSubjects } from "../../constants"
-
 import DoubtCard from "../../components/shared/DoubtCard";
-import { useCreateMyDoubtsPost } from "../../lib/react-query/queriesAndMutations";
 
-import Loader from "@/components/shared/Loader";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { config } from "../../config";
+import { useGetRecentDoubtsPosts } from "../../lib/react-query/queriesAndMutations";
 
+import { validSubjects } from "../../constants"
 
 const Dashboard = () => {
 
-  // const {
-  //   data: posts,
-  //   isPending: isPostLoading,
-  //   error
-  // } = useCreateMyDoubtsPost();
+  const {
+    data: doubts,
+    isPending: isDoubtsLoading,
+    error: isDoubtsError
+  } = useGetRecentDoubtsPosts();
 
-  const [posts, setPosts] = useState([]);
-
-
-  const getRecentDoubtsPosts = async () => {
-    try {
-      const response = await axios.get(`${config.endpoint}/doubtRequest/get-all-doubts`);
-      console.log(response.data.data);
-      setPosts(response.data.data)
-    } catch (error) {
-      throw error.response?.data || error.message;
-    }
-  };
-
-  useEffect(() => {
-    getRecentDoubtsPosts()
-  }, []);
-
-
-
-  console.log("Posts:", posts);
+  // console.log("Posts:", posts);
   // console.log("Error:", error);
-
 
   return (
     <section className="flex flex-1">
@@ -51,43 +26,36 @@ const Dashboard = () => {
           <Heading title={"Subjects"} />
         </div>
 
-
         <div className="card-grid">
           {validSubjects.map(subject => (
             <SubjectCard key={subject.id} value={subject.value} label={subject.label} imgURL={subject.imgURL} />
           ))}
         </div>
 
+        {/* <div className="bg-black  max-w-5xl  overflow-hidden">
+          <div className="m-5 flex flex-row gap-4 overflow-x-scroll  ">
+            {validSubjects.map(subject => (
+              <SubjectCard key={subject.id} value={subject.value} label={subject.label} imgURL={subject.imgURL} />
+            ))}
+          </div>
+        </div> */}
+
 
         <Heading title={"Doubts"} />
 
-        {/* {error ? (
-          <div>Error fetching data: {error}</div>
-        ) : isPostLoading ? (
+        {isDoubtsError ? (
+          <div>Error fetching data: {isDoubtsError.message}</div>
+        ) : isDoubtsLoading ? (
           <Loader />
-        ) : !posts ? (
+        ) : !doubts ? (
           <div>No doubts available</div>
         ) : (
-          <ul className="flex flex-col flex-1 gap-9 w-full">
-            {posts.map((post) => (
-              <DoubtCard post={post} key={post._id} />
+          <ul className="card-doubt-grid">
+            {doubts.map((doubt) => (
+              <DoubtCard doubt={doubt} key={doubt._id} />
             ))}
           </ul>
-        )} */}
-
-
-        {
-          posts && (
-            <ul className="flex flex-row gap-4 w-full">
-              {posts.map((post) => (
-                <DoubtCard post={post} key={post._id} />
-              ))}
-            </ul>
-          )
-        }
-
-
-
+        )}
 
       </div>
 

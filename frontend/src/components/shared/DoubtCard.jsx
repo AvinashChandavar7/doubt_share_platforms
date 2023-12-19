@@ -11,8 +11,8 @@ import {
   Label
 } from "../ui/label"
 
-const DoubtCard = ({ post }) => {
-  const { subject, language, status } = post
+const DoubtCard = ({ doubt }) => {
+  const { subject, language, status } = doubt
   return (
     <Card>
       <CardHeader className="flex flex-col items-start justify-between">
