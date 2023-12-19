@@ -75,9 +75,9 @@ export const useGetCurrentUser = () => {
 
   return useMutation({
     mutationFn: getCurrentUser,
-    onSuccess: (data) => {
+    onSuccess: () => {
 
-      console.table("getCurrentUser =>", data);
+      // console.table("getCurrentUser =>", data);
 
       // const token = data.data.token;
       // const id = data.data?._id;

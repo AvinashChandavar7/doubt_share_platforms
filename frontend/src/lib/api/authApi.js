@@ -28,7 +28,7 @@ export const getCurrentUser = async () => {
     if (!token) {
       throw new Error('Token not found in localStorage');
     }
-    console.log('Get Current UserToken:', token);
+    // console.log('Get Current UserToken:', token);
 
     const response = await axios.get(`${config.endpoint}/users/current-user`, {
       headers: { Authorization: `Bearer ${token}`, },

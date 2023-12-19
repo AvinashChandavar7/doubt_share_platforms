@@ -30,7 +30,7 @@ const getAllDoubts = asyncHandler(async (req, res) => {
   const doubts = await DoubtRequest.find({}).sort({ createdAt: -1 });
   // const doubts = await DoubtRequest.find({ studentId }).sort({ createdAt: -1 });
 
-  console.log('Doubts:', doubts);
+  // console.log('Doubts:', doubts);
 
   return res.status(201).json(new ApiResponse(200, doubts, "Retrieved all Doubt "));
 });
@@ -39,12 +39,12 @@ const getDoubtHistory = asyncHandler(async (req, res) => {
   // const { studentId } = req.query;
   const { studentId } = req.body;
 
-  console.log('studentId:', studentId);
+  // console.log('studentId:', studentId);
 
   // Retrieve all doubts for the given student
   const doubts = await DoubtRequest.find({ studentId }).sort({ createdAt: -1 });
 
-  console.log('Doubts:', doubts);
+  // console.log('Doubts:', doubts);
 
   return res.status(201).json(new ApiResponse(200, doubts, "Retrieved all Doubt "));
 });
@@ -52,7 +52,7 @@ const getDoubtHistory = asyncHandler(async (req, res) => {
 const getDoubtById = asyncHandler(async (req, res) => {
   const { doubtId } = req.params;
 
-  console.log('doubtId:', doubtId);
+  // console.log('doubtId:', doubtId);
 
   // Retrieve the doubt by its ID
   const doubt = await DoubtRequest.findById(doubtId);
@@ -75,7 +75,7 @@ const updateDoubtStatus = asyncHandler(async (req, res) => {
     { new: true }
   );
 
-  console.log('Query Result:', updatedDoubt);
+  // console.log('Query Result:', updatedDoubt);
 
   if (!updatedDoubt) {
     console.error('Doubt not found for doubtId:', doubtId);
@@ -89,7 +89,7 @@ const updateDoubtStatus = asyncHandler(async (req, res) => {
 const deleteDoubtById = asyncHandler(async (req, res) => {
   const { doubtId } = req.params;
 
-  console.log('doubtId:', doubtId);
+  // console.log('doubtId:', doubtId);
 
   // Find and delete the doubt by its ID
   const deletedDoubt = await DoubtRequest.findByIdAndDelete(doubtId);

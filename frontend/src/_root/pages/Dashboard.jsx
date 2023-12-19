@@ -7,16 +7,41 @@ import DoubtCard from "../../components/shared/DoubtCard";
 import { useCreateMyDoubtsPost } from "../../lib/react-query/queriesAndMutations";
 
 import Loader from "@/components/shared/Loader";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { config } from "../../config";
 
 
 const Dashboard = () => {
 
-  const {
-    data: posts,
-    isPending: isPostLoading
-  } = useCreateMyDoubtsPost();
+  // const {
+  //   data: posts,
+  //   isPending: isPostLoading,
+  //   error
+  // } = useCreateMyDoubtsPost();
 
-  // console.log(posts);
+  const [posts, setPosts] = useState([]);
+
+
+  const getRecentDoubtsPosts = async () => {
+    try {
+      const response = await axios.get(`${config.endpoint}/doubtRequest/get-all-doubts`);
+      console.log(response.data.data);
+      setPosts(response.data.data)
+    } catch (error) {
+      throw error.response?.data || error.message;
+    }
+  };
+
+  useEffect(() => {
+    getRecentDoubtsPosts()
+  }, []);
+
+
+
+  console.log("Posts:", posts);
+  // console.log("Error:", error);
+
 
   return (
     <section className="flex flex-1">
@@ -35,19 +60,33 @@ const Dashboard = () => {
 
 
         <Heading title={"Doubts"} />
+
+        {/* {error ? (
+          <div>Error fetching data: {error}</div>
+        ) : isPostLoading ? (
+          <Loader />
+        ) : !posts ? (
+          <div>No doubts available</div>
+        ) : (
+          <ul className="flex flex-col flex-1 gap-9 w-full">
+            {posts.map((post) => (
+              <DoubtCard post={post} key={post._id} />
+            ))}
+          </ul>
+        )} */}
+
+
         {
-          isPostLoading && !posts ? (
-            <Loader />
-          ) : (
-            <ul className="flex flex-col flex-1 gap-9 w-full">
-              {
-                posts?.map((post) => (
-                  <DoubtCard post={post} key={post.caption} />
-                ))
-              }
+          posts && (
+            <ul className="flex flex-row gap-4 w-full">
+              {posts.map((post) => (
+                <DoubtCard post={post} key={post._id} />
+              ))}
             </ul>
           )
         }
+
+
 
 
       </div>

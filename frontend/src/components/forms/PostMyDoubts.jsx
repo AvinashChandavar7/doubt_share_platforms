@@ -55,7 +55,7 @@ const PostMyDoubts = ({ post, action }) => {
     resolver: zodResolver(PostValidation),
     defaultValues: {
       studentId: userId,
-      userType: post ? post.userType : "",
+      subject: post ? post.subject : "",
       language: post ? post.language : "",
       description: post ? post.description : "",
       // imgURL: '',
@@ -75,7 +75,7 @@ const PostMyDoubts = ({ post, action }) => {
     }
 
     toast({ title: "created Doubts successfully" });
-    navigate("/");
+    navigate("/dashboard");
   }
 
 
@@ -89,7 +89,7 @@ const PostMyDoubts = ({ post, action }) => {
         {/* Subject */}
         <FormField
           control={form.control}
-          name="userType"
+          name="subject"
           render={({ field }) => (
             <FormItem className="mb-5">
               <FormLabel>Choose Subject</FormLabel>

@@ -10,7 +10,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   const { username, email, password, userType } = req.body;
 
-  console.log("Body", req.body);
+  // console.log("Body", req.body);
 
   if ([username, email, password, userType].some((field) => field?.trim() === "")) {
     throw new ApiError(400, "All field is required")
@@ -50,7 +50,7 @@ const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
 
-  console.log("Body", req.body);
+  // console.log("Body", req.body);
 
   const user = await User.findOne({ email });
 
@@ -75,7 +75,7 @@ const loginUser = asyncHandler(async (req, res) => {
 const getCurrentUser = asyncHandler(async (req, res) => {
   const currentUser = req.user;
 
-  console.log("currentUser => ", req.user._id);
+  // console.log("currentUser => ", req.user._id);
 
   if (!currentUser) {
     throw new ApiError(404, "User not found");

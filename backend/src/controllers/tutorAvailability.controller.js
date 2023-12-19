@@ -37,7 +37,7 @@ const countAvailableTutors = async () => {
       lastPing: { $gt: threeSecondsAgo },
     });
 
-    console.log(`[${new Date()}] Available Tutors Count: ${availableTutorsCount}`);
+    // console.log(`[${new Date()}] Available Tutors Count: ${availableTutorsCount}`);
   } catch (error) {
     console.error('Error counting available tutors:', error);
   }

@@ -43,7 +43,7 @@ const AuthProvider = ({ children }) => {
 
       const { data: currentAccount } = await getCurrentUser();
 
-      console.table(currentAccount);
+      // console.table(currentAccount);
 
       if (currentAccount) {
         setUser({
@@ -70,12 +70,12 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const userId = localStorage.getItem('id');
 
-    console.log("token authContext", userId);
+    // console.log("token authContext", userId);
 
     if (
       // user
       // ||
-      user === '[]'
+      userId === '[]'
       // || user === null
     ) {
       navigate('/sign-in')

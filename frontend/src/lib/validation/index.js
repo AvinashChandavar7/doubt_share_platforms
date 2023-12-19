@@ -16,7 +16,7 @@ export const SigninValidation = z.object({
 });
 export const PostValidation = z.object({
   studentId: z.string(),
-  userType: z.string().min(1, { message: "Please select a UserType" }),
+  subject: z.string().min(1, { message: "Please select a subject" }),
   language: z.string().min(1, { message: "Please select a Language" }),
   description: z.string().min(5).max(2200),
   // imgURL: z.string().optional(),
