@@ -21,8 +21,8 @@ const DoubtCard = ({ doubt }) => {
         <CardTitle>Subjects : {subject || "English"}</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-6">
-        <Label className="text-primary-800">Status : {status || "Resolved"}</Label>
-        <div className="h-5 border bg-primary-800  flex justify-end items-center"> 100%</div>
+        <Label className="text-primary-800">Status : <span className="text-yellow-700 ">{status || "Resolved"}</span></Label>
+        <div className="h-5 border bg-rose-700  flex justify-end items-center"> 100%</div>
       </CardContent>
       <CardFooter>
         <CardDescription className="uppercase">
