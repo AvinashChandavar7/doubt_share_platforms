@@ -56,3 +56,8 @@ const DoubtCard = ({ doubt }) => {
 }
 
 export default DoubtCard
+
+
+
+
+
