@@ -31,6 +31,16 @@ export const getRecentDoubtsPosts = async () => {
   }
 };
 
-getRecentDoubtsPosts();
+// export const getMyDoubtsPosts = async (id) => {
+//   try {
+//     const response = await axios.get(`${config.endpoint}/get-doubt-by-id/${id}`);
+//     console.log(response.data.data);
+//     return response.data.data;
+//   } catch (error) {
+//     throw error.response?.data || error.message;
+//   }
+// };
+
+// getMyDoubtsPosts();
 
 

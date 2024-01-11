@@ -13,6 +13,8 @@ const Doubts = () => {
   } = useGetRecentDoubtsPosts();
 
 
+
+
   return (
     <section className="flex flex-1">
       <div className="common-container">
@@ -27,7 +29,9 @@ const Doubts = () => {
         ) : isDoubtsLoading ? (
           <Loader />
         ) : !myDoubts ? (
-          <div>No doubts available</div>
+          <div className="text-2xl flex items-center justify-center h-full">
+            No doubts available
+          </div>
         ) : (
           <ul className="grid grid-cols-3 gap-4 w-full">
             {myDoubts.map((doubt) => (

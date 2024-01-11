@@ -12,19 +12,24 @@ const ChatRoom = () => {
         </div>
 
 
-        <div className="w-full h-[90%] border flex flex-row">
-          <div className="border w-[30%]"></div>
-          <div className="border w-[70%]"></div>
+        <div className="w-full h-full  flex flex-row">
+          <div className="border w-[30%] rounded-md">
+
+          </div>
+          <div className="border w-[70%] rounded-md">
+
+            <div className="w-full h-full flex flex-row gap-2 items-end p-5">
+
+              <Input type="text" className="shad-input" placeholder="Enter the Username" />
+              <Button type="submit" className="py-6 px-10 shad-button_primary">
+                go
+              </Button>
+            </div>
+          </div>
         </div>
 
 
-        <div className="w-full flex flex-row gap-5">
 
-          <Input type="text" className="shad-input" placeholder="Enter the Username" />
-          <Button type="submit" className="py-6 px-10 shad-button_primary">
-            go
-          </Button>
-        </div>
       </div>
 
     </section>
