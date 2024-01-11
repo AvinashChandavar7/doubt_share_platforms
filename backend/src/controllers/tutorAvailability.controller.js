@@ -3,7 +3,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 
 import { User } from "../models/user.model.js"
-import { TutorAvailabilityModel } from "../models/TutorAvailability.model.js"
+import { TutorAvailabilityModel } from "../models/tutorAvailability.model.js"
 
 import cron from 'node-cron';
 

@@ -3,7 +3,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 
 import { User } from "../models/user.model.js"
-import { DoubtRequest } from "../models/DoubtRequest.model.js"
+import { DoubtRequest } from "../models/doubtRequest.model.js"
 
 
 const createDoubt = asyncHandler(async (req, res) => {
