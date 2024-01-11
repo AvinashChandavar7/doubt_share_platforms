@@ -5,7 +5,7 @@ import { Button } from "../../components/ui/button";
 const Home = () => {
 
   return (
-    <section className="flex m-10  bg-gradient-to-r from-violet-900 to-blue-900  border">
+    <section className="flex m-10  bg-gradient-to-r from-violet-900 to-blue-900 rounded-md">
 
       <div className='flex flex-1 justify-center items-center flex-col py-10'>
 
@@ -27,21 +27,21 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="flex items-end justify-end mr-10">
+          <div className="flex items-end justify-end mr-11">
 
             <Link to='/sign-in' className="text-primary-500 text-small-semibold p-5 ">
-              <Button type="submit" className="shad-button_primary">
+              <Button type="submit" className="shad-button_primary ">
                 Get started
               </Button>
             </Link>
           </div>
         </div>
       </div>
-      <div className="hidden xl:flex h-full w-1/2 border-l ">
+      <div className="hidden xl:flex h-full w-1/2  ">
         <img
           src='/assets/images/landingPage.png'
           alt='side-img'
-          className=' object-fill bg-no-repeat'
+          className=' object-contain bg-no-repeat p-5'
         />
       </div>
     </section >
