@@ -32,8 +32,8 @@ const DoubtCard = ({ doubt }) => {
           <Label className="">Status : &nbsp;
             <span className={` px-4 py-1 rounded-md
             ${status === "Accepted" && 'bg-green-700'}  
-           ${status === "Pending" && 'bg-yellow-700'}  
-           ${status === "Rejected" && 'bg-rose-700'} `}>
+          ${status === "Pending" && 'bg-yellow-700'}  
+          ${status === "Rejected" && 'bg-rose-700'} `}>
               {status || "Resolved"}
             </span>
           </Label>
