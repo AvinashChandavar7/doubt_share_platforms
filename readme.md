@@ -17,7 +17,7 @@ The Doubt Share Platform is an interactive solution designed to facilitate the s
 1. Clone the repository:
 
 ```shell
-git clone https://github.com/your-username/your-repo-name.git
+git clone git@github.com:AvinashChandavar7/doubt_share_platforms.git
 ```
 
 2. Install dependencies for the backend:
